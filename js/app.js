@@ -1,4 +1,6 @@
+let map, largeInfowindow;
 
+//let apiUrl = '';
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -7,5 +9,11 @@ function initMap() {
       zoom: 13
     });
 
+    largeInfowindow = new google.maps.InfoWindow();
+
     ko.applyBindings(new ViewModel());
+}
+
+function googleError(){
+    alert('地图加载错误');
 }
