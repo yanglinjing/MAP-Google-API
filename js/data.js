@@ -27,7 +27,7 @@ let Place = function(data){
         if(placeName.indexOf(userInput) == -1){
             return false;//不匹配
         }else{
-            return true;//匹配
+            return true;//匹配。无输入也算在内
         }
 
     });
@@ -43,7 +43,7 @@ let Place = function(data){
     //添加事件监听器
     this.marker.addListener('click', function(){
         animateMarker(this);//icon跳动两下
-        getComments(this, largeInfowindow);//异步加载第三方API
+        getComments(this, largeInfowindow, data);//异步加载第三方API
         openInfoWindow(this, largeInfowindow);//弹出窗口
     });
 
@@ -78,8 +78,9 @@ let ViewModel = function(){
 
 };
 
-function getComments(marker, infowindow){
-
+function getComments(marker, infowindow, data){
+    let yelpUrl = 'https://api.yelp.com/v3/businesses/search?term=delis&latitude='+ data.location.lat +'&longitude=' + data.location.lng;
+    console.log(yelpUrl);
 }
 
 //retrieved from the udacity instructor notes
