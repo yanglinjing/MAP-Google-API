@@ -7,7 +7,7 @@ let initialPlaces = [
   {title: 'Arashiyama Park Kameyama Area', location: {lat: 35.0142738, lng: 135.6717478}}
 ];
 
-let filterText = ko.observable();//输入框里的文字
+let filterText = ko.observable("");//输入框里的文字
 
 //------------章鱼模型-----------
 let Place = function(data){
@@ -15,6 +15,22 @@ let Place = function(data){
 
     this.title = ko.observable(data.title);
     this.location = ko.observable(data.location);
+
+    //在输入框写入内容，则只有匹配的列表项的该（visiable）属性为true
+    //retrieved from the udacity mentor @Zhilian's notes
+    this.visiable = ko.computed(function(){
+        let placeName = data.title.toLowerCase();//值不能用observable
+        let userInput = filterText().toLowerCase();//全部转换小写，便于匹配
+
+        //a.indexOf(b)如果b包含在a中，返回0-正无穷之间的值；
+        //如果b完全不含在a中，返回-1
+        if(placeName.indexOf(userInput) == -1){
+            return false;//不匹配
+        }else{
+            return true;//匹配
+        }
+
+    });
 
     //制作地图上的红色图标
     this.marker = new google.maps.Marker({
@@ -40,11 +56,24 @@ let Place = function(data){
 
 let ViewModel = function(){
     let self = this;
-    this.placeList = ko.observableArray([]);//把地点们放在监控数组中
+    this.placeList = [];
 
-    //遍历所有初始地点，为每个地点建立新对象，并放入监控数组
+    //遍历所有初始地点，为每个地点建立新对象，并放入数组
     initialPlaces.forEach(function(placeItem){
         self.placeList.push(new Place(placeItem));
+    });
+
+    //只有匹配项（的列表内容和Marker），会被留在页面上
+    this.matchedPlaceList = ko.computed(function(){
+        let matchedPlaceArray = [];
+
+        self.placeList.forEach(function(place){
+            if(place.visiable()){
+                matchedPlaceArray.push(place);
+            }
+        });
+
+        return matchedPlaceArray;
     });
 
 };

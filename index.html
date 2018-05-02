@@ -15,10 +15,10 @@
         <h1>My Favourite Places</h1>
 
         <!--输入框-->
-        <input type="text" data-bind="textInput:filterText">
+        <input type="text" placeholder="Search for names.." data-bind="textInput:filterText">
 
         <!--列表-->
-        <ul data-bind="foreach: placeList">
+        <ul data-bind="foreach: matchedPlaceList">
           <li data-bind="text: title, click: clickMarker"></li>
         </ul>
 
