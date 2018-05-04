@@ -59,6 +59,9 @@ let ViewModel = function(){
         self.placeList.forEach(function(place){
             if(place.visiable()){
                 matchedPlaceArray.push(place);
+                place.marker.setMap(map);
+            }else{
+                place.marker.setMap(null);
             }
         });
 
