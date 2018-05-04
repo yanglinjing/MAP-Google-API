@@ -9,36 +9,47 @@
   </head>
 
   <body>
+    <!-- All the icon/bg pictures used in this project were drawn by myself. -->
     <div class="container">
 
-      <div class="leftBar">
+      <div class="leftBar width30" id="mySidenav">
 
-        <h1>Find Food Nearby</h1>
-
-        <div class="notes">
-          <p>&ensp;&ensp;&ensp;Click the listed travel destinations, or type its name below to find food suggestions.</p>
+        <!-- 开关侧边栏按钮 -->
+        <div class="sidebarButton">
+          <a href="javascript:void(0)" onclick="changeNav()">
+            <img src="img/menu.svg" alt="openButton">
+          </a>
         </div>
 
-        <!--输入框-->
-        <input type="text" placeholder="Search for names..." data-bind="textInput:filterText">
+        <!-- 左侧内容 -->
+        <div class="padding20">
 
-        <!--列表-->
-        <ul class="placeOfInterests" data-bind="foreach: matchedPlaceList">
-          <li data-bind="text: title, click: clickMarker"></li>
-        </ul>
+            <h1>Find Food Nearby</h1>
 
-        <!--按钮：隐藏餐馆Marker-->
-        <!-- <input id="hide_restaurants" type="button" value="Hide Restaurants"> -->
+            <p class="notes">&ensp;&ensp;&ensp;Click the listed travel destinations, or type its name below to find food suggestions.</p>
 
+            <!--输入框-->
+            <input type="text" placeholder="Search for names..." data-bind="textInput:filterText">
+
+            <!--列表-->
+            <ul class="placeOfInterests" data-bind="foreach: matchedPlaceList">
+              <li data-bind="text: title, click: clickMarker"></li>
+            </ul>
+
+            <!--按钮：隐藏餐馆Marker-->
+            <!-- <input id="hide_restaurants" type="button" value="Hide Restaurants"> -->
+
+        </div>
       </div>
 
       <!--地图-->
-      <div id="map"></div>
+      <div id="map" class="left330"></div>
     </div>
 
 
     <!--js-->
     <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
+    <script type='text/javascript' src='js/sidebar.js'></script>
     <script type='text/javascript' src='js/app.js'></script>
     <script type='text/javascript' src='js/data.js'></script>
     <script type='text/javascript' src='js/viewModel.js'></script>

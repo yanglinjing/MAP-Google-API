@@ -21,15 +21,33 @@ body {
 #map {
   bottom:0px;
   height: 100%;
-  left: 330px;
   position: absolute;
   right: 0px;
 }
 
+.left330 {
+  left: 330px;
+}
+
+.left0 {
+  left: 0;
+}
+
 .leftBar {
   padding: 20px;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.5s;
   width: 330px;
+}
 
+.padding20{
+  padding: 0 20px 0;
+}
+
+.width0 {
+  width: 0;
 }
 
 h1 {
@@ -67,6 +85,7 @@ color: #999;
 .placeOfInterests {
    list-style-image: url(../img/interest.svg);
    line-height: 24px;
+   cursor: pointer;
 }
 
 .yelpWindow{
@@ -76,4 +95,22 @@ color: #999;
 .yelpPic{
   max-width: 160px;
   max-height: 160px;
+}
+
+.sidebarButton {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebarButton a {
+  margin-top: 18px;
+  display: inline-block;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.sidebarButton a:hover {
+  opacity: 1;
 }
