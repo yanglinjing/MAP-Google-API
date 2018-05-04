@@ -11,16 +11,24 @@
   <body>
     <div class="container">
 
-      <div class="options-box">
-        <h1>My Favourite Places</h1>
+      <div class="leftBar">
+
+        <h1>Find Food Nearby</h1>
+
+        <div class="notes">
+          <p>&ensp;&ensp;&ensp;Click the listed travel destinations, or type its name below to find food suggestions.</p>
+        </div>
 
         <!--输入框-->
-        <input type="text" placeholder="Search for names.." data-bind="textInput:filterText">
+        <input type="text" placeholder="Search for names..." data-bind="textInput:filterText">
 
         <!--列表-->
-        <ul data-bind="foreach: matchedPlaceList">
+        <ul class="placeOfInterests" data-bind="foreach: matchedPlaceList">
           <li data-bind="text: title, click: clickMarker"></li>
         </ul>
+
+        <!--按钮：隐藏餐馆Marker-->
+        <!-- <input id="hide_restaurants" type="button" value="Hide Restaurants"> -->
 
       </div>
 

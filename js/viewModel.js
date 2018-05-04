@@ -60,10 +60,13 @@ let ViewModel = function(){
             if(place.visiable()){
                 matchedPlaceArray.push(place);
                 place.marker.setMap(map);
+                bounds.extend(place.marker.position);//扩展地图，包含该marker
             }else{
                 place.marker.setMap(null);
             }
         });
+
+        map.fitBounds(bounds);//地图适应新界限
 
         return matchedPlaceArray;
     });

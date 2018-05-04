@@ -1,31 +1,79 @@
 html,
 body {
   font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #0c3f5d;
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
   height: 100%;
   position: relative;
-}
-
-input {
-  font-size: 12px;
-}
-
-h1 {
-  color: #525454;
-  font-size: 22px;
-  margin: 0 0 10px 0;
-  text-align: center;
+  background: repeat url(../img/bg.svg);
 }
 
 #map {
   bottom:0px;
   height: 100%;
-  left: 362px;
+  left: 330px;
   position: absolute;
   right: 0px;
+}
+
+.leftBar {
+  padding: 20px;
+  width: 330px;
+
+}
+
+h1 {
+  font-size: 22px;
+}
+
+.notes{
+  font-size: 14px;
+  font-style: italic;
+  color: #4393c1;
+  background: url(../img/restaurant.svg) no-repeat 0 0;
+}
+
+input {
+  margin-left: 20px;
+  border: 1px solid #4CABE1;
+  color: #4CABE1;
+  height: 26px;
+  width: 220px;
+}
+
+input::-webkit-input-placeholder { /* WebKit browsers */
+color: #4CABE1;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+color: #999;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+color: #999;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+color: #999;
+}
+
+.placeOfInterests {
+   list-style-image: url(../img/interest.svg);
+   line-height: 24px;
+}
+
+.yelpWindow{
+  width: 200px;
+}
+
+.yelpPic{
+  max-width: 160px;
+  max-height: 160px;
 }

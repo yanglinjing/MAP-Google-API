@@ -19,16 +19,23 @@ function getComments(marker, infowindow, data){
     fetch(yelpUrl, myInit)//参数一网址，参数二对象
         .then(res => res.json())//返回结果转为json格式
         .then(data => showRestaurants(data))
-        .catch(_=> alert("Sorry, we could not find any restaurants near it."))
+        .catch(e=> function(e){
+            alert("Opps! Something went wrong!" + e);
+          })
 
 }
 
 function showRestaurants(data){
-    let restaurants = data.businesses;//是个Array
-    let restaurantList = [];
+    let restaurants = data.businesses;//yelp返回的Array
+    console.log(restaurants);
+    let restaurantList = [];//放置实例
     restaurants.map(restaurant => {
         restaurantList.push(new Restaurant(restaurant));
     });
+    restaurantList.map(restaurant =>{
+        bounds.extend(place.marker.position);//扩展地图，包含该marker
+    });
+    map.fitBounds(bounds);//地图适应新界限
 }
 
 //------------景点附近餐厅的类-----------
@@ -48,14 +55,14 @@ let Restaurant = function(data){
     console.log(this.imgUrl);
     this.id = data.id
 
-    //制作地图上的红色图标
+    //制作地图上的餐馆图标
     this.marker = new google.maps.Marker({
         map: map,
-        position: self.location,//值不能用observable
+        position: self.location,
         title: self.title,
         animation: google.maps.Animation.DROP,
         icon: {
-          url: 'http://maps.google.com/mapfiles/kml/shapes/dining.png',
+          url: 'img/restaurant_loc.svg',
           //size: new google.maps.Size(20, 20)
         }
     });
@@ -71,14 +78,23 @@ function openRestaurantWindow(restaurant, marker, infowindow){
   if (infowindow.marker != marker) {
     infowindow.marker = marker;
 
-    let address =  restaurant.address.address1
-                  + restaurant.address.address2
-                  + restaurant.address.address3
-                  + restaurant.address.city;
+    let address = '';
+    if(restaurant.address.address1){
+        address += restaurant.address.address1;
+    }
+    if(restaurant.address.address2){
+        address += restaurant.address.address2;
+    }
+    if(restaurant.address.address3){
+        address += restaurant.address.address3;
+    }
+    if(restaurant.address.city){
+        address += restaurant.address.city;
+    }
 
-    let innerHTML = '<div>'
+    let innerHTML = "<div class='yelpWindow'>"
     + '<h3>' + marker.title +'</h3>'
-    + "<img src='" + restaurant.imgUrl + "' alt='restaurant'>"
+    + "<img src='" + restaurant.imgUrl + "' alt='restaurant' class='yelpPic'>"
     + '<br>Address: ' + address.replace(/\s+/g,"")
     + '<br>Rating: ' + restaurant.rating
     + '<br>Distance: ' + restaurant.distance + ' km'
@@ -93,3 +109,11 @@ function openRestaurantWindow(restaurant, marker, infowindow){
     });
   }
 }
+
+//这段代码不工作
+// function hideRestaurants(){
+//     document.getElementById('hide_restaurants').addEventListener('click', function(){
+//         restaurantList.map(restaurant => restaurant.marker.setMap(null));
+//         console.log(restaurant.marker);
+//     })
+// }

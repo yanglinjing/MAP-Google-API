@@ -1,4 +1,4 @@
-let map, largeInfowindow;
+let map, largeInfowindow, bounds;
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -8,6 +8,8 @@ function initMap() {
     });
 
     largeInfowindow = new google.maps.InfoWindow();
+
+    bounds = new google.maps.LatLngBounds();
 
     ko.applyBindings(new ViewModel());
 }
