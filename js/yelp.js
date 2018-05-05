@@ -1,5 +1,7 @@
 function getComments(marker, infowindow, data){
 
+    foodMarkers = [];//清空数组
+
     //使用https://cors-anywhere.herokuapp.com/完成‘跨域请求Access-Control-Allow-Origin’
     //The Access-Control-Allow-Origin response header indicates
     //Twhether the response can be shared with resources with the given origin.
@@ -27,13 +29,15 @@ function getComments(marker, infowindow, data){
 
 function showRestaurants(data){
     let restaurants = data.businesses;//yelp返回的Array
-    console.log(restaurants);
     let restaurantList = [];//放置实例
+
     restaurants.map(restaurant => {
         restaurantList.push(new Restaurant(restaurant));
     });
+
     restaurantList.map(restaurant =>{
-        bounds.extend(place.marker.position);//扩展地图，包含该marker
+        bounds.extend(restaurant.marker.position);//扩展地图，包含该marker
+        foodMarkers.push(restaurant.marker);//把Marker放到全局变量里
     });
     map.fitBounds(bounds);//地图适应新界限
 }
@@ -52,7 +56,6 @@ let Restaurant = function(data){
     this.location = {lat: self.lat, lng: self.lng};
 
     this.imgUrl = data.image_url;
-    console.log(this.imgUrl);
     this.id = data.id
 
     //制作地图上的餐馆图标
@@ -110,10 +113,9 @@ function openRestaurantWindow(restaurant, marker, infowindow){
   }
 }
 
-//这段代码不工作
-// function hideRestaurants(){
-//     document.getElementById('hide_restaurants').addEventListener('click', function(){
-//         restaurantList.map(restaurant => restaurant.marker.setMap(null));
-//         console.log(restaurant.marker);
-//     })
-// }
+//点击按钮，隐藏food markers
+document.getElementById('hide_restaurants').addEventListener('click', function(){
+    foodMarkers.map(foodMarker => {
+       foodMarker.setMap(null);
+     });
+});

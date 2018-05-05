@@ -10,4 +10,4 @@ let initialPlaces = [
 
 let filterText = ko.observable("");//输入框里的文字
 
-//let restaurantList;//配合hide-restaurant
+let foodMarkers = [];//用于隐藏food Marker

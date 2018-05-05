@@ -31,6 +31,9 @@ let Place = function(data){
 
     //添加事件监听器
     this.marker.addListener('click', function(){
+        foodMarkers.map(foodMarker => {
+            foodMarker.setMap(null);//隐藏地图上marker
+        });
         animateMarker(this);//icon跳动两下
         getComments(this, largeInfowindow, data);//异步加载第三方API,在yelp.js文件中
         openInfoWindow(this, largeInfowindow);//弹出窗口

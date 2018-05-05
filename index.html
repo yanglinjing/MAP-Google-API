@@ -29,7 +29,7 @@
             <p class="notes">&ensp;&ensp;&ensp;Click the listed travel destinations, or type its name below to find food suggestions.</p>
 
             <!--输入框-->
-            <input type="text" placeholder="Search for names..." data-bind="textInput:filterText">
+            <input type="search" placeholder="Search for names..." data-bind="textInput:filterText">
 
             <!--列表-->
             <ul class="placeOfInterests" data-bind="foreach: matchedPlaceList">
@@ -37,7 +37,7 @@
             </ul>
 
             <!--按钮：隐藏餐馆Marker-->
-            <!-- <input id="hide_restaurants" type="button" value="Hide Restaurants"> -->
+            <input id="hide_restaurants" type="button" value="Clear Restaurants">
 
         </div>
       </div>
