@@ -114,3 +114,8 @@ color: #999;
 .sidebarButton a:hover {
   opacity: 1;
 }
+
+#hide_restaurants {
+  background: #e6f3fa;
+  border-radius: 6px;
+}
